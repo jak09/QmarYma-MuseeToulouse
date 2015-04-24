@@ -4,9 +4,13 @@ class Adresse {
 
     int numero
     String rue
-    int codePostal
+    String codePostal
     String ville
 
     static constraints = {
     }
+
+    static belongsTo = [
+            musee: Musee
+    ]
 }

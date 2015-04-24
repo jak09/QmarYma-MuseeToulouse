@@ -3,7 +3,7 @@ package musee
 class Musee {
 
     String nom
-    String horaireOuverture
+    String horairesOuverture
     String telephone
     String accesMetro
     String accesBus
@@ -13,6 +13,11 @@ class Musee {
     }
 
     static belongsTo = [
-            gestionnaire: Gestionnaire
+            musee: Musee
     ]
+
+    static mapping = {
+        adresse fetch: 'join'
+    }
+
 }
