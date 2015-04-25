@@ -13,4 +13,10 @@ class Adresse {
     static belongsTo = [
             musee: Musee
     ]
+
+    @Override
+    String toString() {
+        numero + " " + rue + "\n" +
+                codePostal + " " + ville
+    }
 }

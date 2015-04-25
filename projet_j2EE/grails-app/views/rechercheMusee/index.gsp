@@ -38,9 +38,7 @@
                             Nom rue musee contient:
                         </label>
                         <g:textField name="extraitRue"/>
-                    </div>
-                    <div>
-                        <g:actionSubmit action="doSearchMusee" value="Rechercher"/>
+						<g:actionSubmit action="doSearchMusee" value="Rechercher"/>
                     </div>
                 </fieldset>
             </g:form>
@@ -52,12 +50,20 @@
 			<table>
 			<thead>
 					<tr>
+
+						<g:sortableColumn property="extraitNom" title="Nom" />
+
+						<g:sortableColumn property="telephone" title="Telephone" />
 					
-						<g:sortableColumn property="codePostal" title="${message(code: 'rechercheMusee.codePostal.label', default: 'Code Postal')}" />
-					
-						<g:sortableColumn property="extraitNom" title="${message(code: 'rechercheMusee.extraitNom.label', default: 'Nom')}" />
-					
-						<g:sortableColumn property="extraitRue" title="${message(code: 'rechercheMusee.extraitRue.label', default: 'Rue')}" />
+						<g:sortableColumn property="adresse" title="Adresse" />
+
+						<g:sortableColumn property="accesMetro" title="Acces Metro"/>
+
+						<g:sortableColumn property="accesBus" title="Acces Bus"/>
+
+						<g:sortableColumn property="horairesOuverture" title="Horaires" />
+
+						<g:sortableColumn property="gestionnaire" title="Gestionnaire"/>
 					
 					</tr>
 				</thead>
@@ -65,18 +71,27 @@
 				<g:each in="${rechercheMuseeInstanceList}" status="i" var="rechercheMuseeInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${rechercheMuseeInstance.id}">${fieldValue(bean: rechercheMuseeInstance, field: "adresse.codePostal")}</g:link></td>
+						<td><g:link action="show" id="${rechercheMuseeInstance.id}">${fieldValue(bean: rechercheMuseeInstance, field: "nom")}</g:link></td>
 
-						<td>${fieldValue(bean: rechercheMuseeInstance, field: "nom")}</td>
-					
-						<td>${fieldValue(bean: rechercheMuseeInstance, field: "adresse.rue")}</td>
-					
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "telephone")}</td>
+
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "adresse")}</td>
+
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "accesMetro")}</td>
+
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "accesBus")}</td>
+
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "horairesOuverture")}</td>
+
+						<td>${fieldValue(bean: rechercheMuseeInstance, field: "gestionnaire")}</td>
+
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${rechercheMuseeInstanceCount ?: 0}" />
+				<g:paginate next="Suivant" prev="Precedent" maxsteps="1"
+							total="${rechercheMuseeInstanceCount ?: 0}" />
 			</div>
 		</div>
 	</body>

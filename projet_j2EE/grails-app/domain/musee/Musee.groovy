@@ -13,11 +13,15 @@ class Musee {
     }
 
     static belongsTo = [
-            musee: Musee
+            gestionnaire: Gestionnaire
     ]
 
     static mapping = {
         adresse fetch: 'join'
     }
 
+    @Override
+    String toString() {
+        nom
+    }
 }

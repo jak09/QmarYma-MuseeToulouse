@@ -10,4 +10,9 @@ class Gestionnaire {
     static hasMany = [
             musees: Musee
     ]
+
+    @Override
+    String toString() {
+        nom
+    }
 }
