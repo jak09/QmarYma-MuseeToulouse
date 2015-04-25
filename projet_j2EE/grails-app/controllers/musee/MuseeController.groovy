@@ -8,12 +8,7 @@ import grails.transaction.Transactional
 class MuseeController {
 
     def museesAffiches
-    def museesPreferes = new ArrayList<Musee>() {
-        @Override
-        boolean equals(Object o) {
-            return o instanceof Musee ? ((Musee)o).nom.equals(nom) : false
-        }
-    }
+    def museesPreferes = new ArrayList<Musee>()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -42,6 +37,13 @@ class MuseeController {
     def doSearchMusee() {
         museesAffiches = RechercheMuseeService.rechercheMuseeAvec(
                 params.extraitNom, params.codePostal, params.extraitRue);
+
+        println("liste des musees preferes:")
+        for (Musee m: museesPreferes)
+            println(m);
+        if (museesPreferes.size()>=2)
+            println(museesPreferes.get(0).equals(museesPreferes.get(1)))
+
         afficheRender()
     }
 
@@ -50,7 +52,9 @@ class MuseeController {
         valeur = (valeur-'Supprimer (')-')'
         int i = Integer.parseInt(valeur)
 
-        museesPreferes.remove(i);
+        Musee museeAsupp = museesPreferes.remove(i);
+        AjoutMuseePrefereService.
+                supprimerMuseePrefere(museeAsupp)
         afficheRender()
     }
 
@@ -64,6 +68,10 @@ class MuseeController {
         museesPreferes.sort {Musee param1, Musee param2 ->
             param1.nom.compareToIgnoreCase(param2.nom)}
         afficheRender()
+    }
+
+    def effectuerDemandeVisite() {
+
     }
 
     @Transactional

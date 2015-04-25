@@ -45,7 +45,7 @@
 				</fieldset>
 
 				<fieldset class="form">
-					<div class="fieldcontain">
+					<div class="encart">
 						<table>
 							<tr>
 								<td>Mes mus&eacute;es pr&eacute;fer&eacute;s:</td>
@@ -54,10 +54,14 @@
 								<tr>
 									<td name="attributSupprimer" value="$i">
 										<label>${fieldValue(bean: museePrefereInstance, field: "nom")}</label>
-										<g:actionSubmit value="Supprimer ($i)" action="supprimerMuseePrefere" params="$i" name="supp"/>
+										<g:actionSubmit value="Supprimer ($i)" action="supprimerMuseePrefere"/>
 									</td>
 								</tr>
 							</g:each>
+							<tr>
+								<td><g:actionSubmit value="Effectuer une demande de visite"
+													action="effectuerDemandeVisite"/></td>
+							</tr>
 						</table>
 					</div>
 				</fieldset>

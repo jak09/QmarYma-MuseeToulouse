@@ -9,6 +9,8 @@ class Musee {
     String accesBus
     Adresse adresse
 
+    Map<DemandeVisite, DemandeVisiteMusee> visites
+
     static constraints = {
     }
 
@@ -16,12 +18,17 @@ class Musee {
         adresse fetch: 'join'
     }
 
-    static hasMany = [
-            //visites: DemandeVisite DemandeVisiteMusee
+    static belongsTo = [
+            gestionnaire: Gestionnaire
     ]
 
     @Override
     String toString() {
         nom
+    }
+
+    @Override
+    boolean equals(Object o) {
+        return o instanceof Musee ? ((Musee)o).nom.equals(nom) : false
     }
 }
