@@ -12,13 +12,13 @@ class Musee {
     static constraints = {
     }
 
-    static belongsTo = [
-            gestionnaire: Gestionnaire
-    ]
-
     static mapping = {
         adresse fetch: 'join'
     }
+
+    static hasMany = [
+            //visites: DemandeVisite DemandeVisiteMusee
+    ]
 
     @Override
     String toString() {
