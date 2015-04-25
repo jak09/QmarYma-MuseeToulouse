@@ -17,7 +17,7 @@ class Musee {
     }
 
     static hasMany = [
-            visites: DemandeVisite// DemandeVisiteMusee
+            //visites: DemandeVisite DemandeVisiteMusee
     ]
 
     @Override
