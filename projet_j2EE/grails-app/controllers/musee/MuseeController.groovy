@@ -45,35 +45,24 @@ class MuseeController {
         afficheRender()
     }
 
-    def ajouterMuseePrefere(int i) {
+    def supprimerMuseePrefere() {
+        String valeur = params._action_supprimerMuseePrefere
+        valeur = (valeur-'Supprimer (')-')'
+        int i = Integer.parseInt(valeur)
+
+        museesPreferes.remove(i);
+        afficheRender()
+    }
+
+    def ajouterMuseePrefere() {
+        String valeur = params._action_ajouterMuseePrefere
+        valeur = (valeur-'Ajouter (')-')'
+        int i = Integer.parseInt(valeur)
+
         museesPreferes.add(AjoutMuseePrefereService.
                 insererMuseePrefere(museesAffiches.get(i)))
         museesPreferes.sort {Musee param1, Musee param2 ->
             param1.nom.compareToIgnoreCase(param2.nom)}
-    }
-
-    def ajouterMuseePrefere0() {
-        ajouterMuseePrefere(0)
-        afficheRender()
-    }
-
-    def ajouterMuseePrefere1() {
-        ajouterMuseePrefere(1)
-        afficheRender()
-    }
-
-    def ajouterMuseePrefere2() {
-        ajouterMuseePrefere(2)
-        afficheRender()
-    }
-
-    def ajouterMuseePrefere3() {
-        ajouterMuseePrefere(3)
-        afficheRender()
-    }
-
-    def ajouterMuseePrefere4() {
-        ajouterMuseePrefere(4)
         afficheRender()
     }
 

@@ -52,7 +52,10 @@
 							</tr>
 							<g:each in="${museePrefereInstanceList}" status="i" var="museePrefereInstance">
 								<tr>
-									<td>${fieldValue(bean: museePrefereInstance, field: "nom")}</td>
+									<td name="attributSupprimer" value="$i">
+										<label>${fieldValue(bean: museePrefereInstance, field: "nom")}</label>
+										<g:actionSubmit value="Supprimer ($i)" action="supprimerMuseePrefere" params="$i" name="supp"/>
+									</td>
 								</tr>
 							</g:each>
 						</table>
@@ -105,7 +108,7 @@
 						<td>${fieldValue(bean: museeInstance, field: "gestionnaire")}</td>
 						
 						<td>
-							<g:actionSubmit action="ajouterMuseePrefere$i"  value="Ajouter"
+							<g:actionSubmit action="ajouterMuseePrefere" value="Ajouter ($i)"
 											disabled="${museePrefereInstanceList.contains(museeInstance)}"/>
 						</td>
 					
