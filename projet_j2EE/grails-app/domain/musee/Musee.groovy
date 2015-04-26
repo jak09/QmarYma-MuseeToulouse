@@ -10,6 +10,12 @@ class Musee {
     Adresse adresse
 
     static constraints = {
+        nom blank: false
+        horairesOuverture nullable: true
+        telephone nullable: true
+        accesMetro nullable: true
+        accesBus nullable: true
+        adresse nullable: true
     }
 
     static mapping = {
@@ -18,10 +24,6 @@ class Musee {
 
     static hasMany = [
             visites: DemandeVisite
-    ]
-
-    static belongsTo = [
-            gestionnaire: Gestionnaire
     ]
 
     @Override
