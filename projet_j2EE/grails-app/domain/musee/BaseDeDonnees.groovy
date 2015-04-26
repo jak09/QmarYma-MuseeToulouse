@@ -31,7 +31,7 @@ class BaseDeDonnees {
                 adresse: new Adresse(
                         numero:2,
                         rue:"RUE DES ARCHIVES",
-                        codePostal: 31500,
+                        codePostal: "31500",
                         ville:"TOULOUSE"))
         m2 = new Musee(
                 nom:"CMAV - CENTRE MERIDIONAL DE L'ARCHITECTURE DE LA VILLE",
@@ -43,7 +43,7 @@ class BaseDeDonnees {
                 adresse: new Adresse(
                         numero:5,
                         rue:"RUE SAINT PANTALEON",
-                        codePostal: 31000,
+                        codePostal: "31000",
                         ville:"TOULOUSE"))
         m3 = new Musee(
                 nom:"ENSEMBLE CONVENTUEL DES JACOBINS",
@@ -54,7 +54,7 @@ class BaseDeDonnees {
                 adresse: new Adresse(
                         numero:69,
                         rue:"RUE PARGAMINIERES",
-                        codePostal: 31000,
+                        codePostal: "31000",
                         ville:"TOULOUSE"))
 
         /*m1.save()
