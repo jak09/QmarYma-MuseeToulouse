@@ -20,8 +20,8 @@ class MuseePrefereSpec extends Specification {
         museePrefere.validate() == true
 
         where:
-        musee                                                                                                  | _
-        new Musee(nom: nom, horairesOuverture: "", telephone: "", accesMetro: "", accesBus: "", adresse: null) | _
+        musee                                                                                                      | _
+        new Musee(nom: "Musee", horairesOuverture: "", telephone: "", accesMetro: "", accesBus: "", adresse: null) | _
 
     }
 
