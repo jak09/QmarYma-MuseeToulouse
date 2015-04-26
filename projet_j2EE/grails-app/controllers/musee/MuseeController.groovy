@@ -1,5 +1,6 @@
 package musee
 
+import java.text.SimpleDateFormat
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -7,14 +8,14 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MuseeController {
 
-    def museesAffiches
+    def museesAffiches = new ArrayList<Musee>()
     def museesPreferes = new ArrayList<Musee>()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond new ArrayList<Musee>(), model: [museeInstanceCount: 0]
+        afficheRender()
     }
 
     def show(Musee museeInstance) {
@@ -34,44 +35,77 @@ class MuseeController {
                 ])
     }
 
+    def afficheRenderDemandeVisite(String msgErreur) {
+        render(view: './../demandeVisite/index', model: [
+                museePrefereInstanceList: museesPreferes,
+                museePrefereInstanceCount: museesPreferes.size(),
+                messageErreur: msgErreur
+        ])
+    }
+
     def doSearchMusee() {
         museesAffiches = RechercheMuseeService.rechercheMuseeAvec(
                 params.extraitNom, params.codePostal, params.extraitRue);
-
-        println("liste des musees preferes:")
-        for (Musee m: museesPreferes)
-            println(m);
-        if (museesPreferes.size()>=2)
-            println(museesPreferes.get(0).equals(museesPreferes.get(1)))
-
         afficheRender()
     }
 
     def supprimerMuseePrefere() {
-        String valeur = params._action_supprimerMuseePrefere
-        valeur = (valeur-'Supprimer (')-')'
-        int i = Integer.parseInt(valeur)
+        int i = Integer.parseInt(params.id-"num")
+        Musee museeAsupprimer = museesPreferes.get(i)
 
-        Musee museeAsupp = museesPreferes.remove(i);
-        AjoutMuseePrefereService.
-                supprimerMuseePrefere(museeAsupp)
+        if (museesPreferes.contains(museeAsupprimer)) {
+            museesPreferes.remove(museeAsupprimer)
+            AjoutMuseePrefereService.
+                    supprimerMuseePrefere(museeAsupprimer)
+        }
         afficheRender()
     }
 
     def ajouterMuseePrefere() {
-        String valeur = params._action_ajouterMuseePrefere
-        valeur = (valeur-'Ajouter (')-')'
-        int i = Integer.parseInt(valeur)
-
-        museesPreferes.add(AjoutMuseePrefereService.
-                insererMuseePrefere(museesAffiches.get(i)))
-        museesPreferes.sort {Musee param1, Musee param2 ->
-            param1.nom.compareToIgnoreCase(param2.nom)}
+        int i = Integer.parseInt(params.id-"num")
+        Musee museeAajouter = museesAffiches.get(i);
+        if (!museesPreferes.contains(museeAajouter)) {
+            museesPreferes.add(AjoutMuseePrefereService.
+                    insererMuseePrefere(museeAajouter))
+            museesPreferes.sort { Musee param1, Musee param2 ->
+                param1.nom.compareToIgnoreCase(param2.nom)
+            }
+        }
         afficheRender()
     }
 
     def effectuerDemandeVisite() {
+        afficheRenderDemandeVisite("")
+    }
 
+    def doDemandeVisite() {
+        Date dateDebut = isValid(
+                params.dateDebutDay+"/"+params.dateDebutMois+"/"+params.dateDebutAnnee)
+        Date dateFin = isValid(
+                params.dateFinDay+"/"+params.dateFinMois+"/"+params.dateFinAnnee)
+        int nbPersonnes = params.nombrePersonnes
+        if (dateDebut && dateFin && dateFin.after(dateDebut) && dateDebut.after(new Date())) {
+            //VALIDE
+            int code = DemandeVisiteService.faireUneDemande(dateDebut, dateFin, nbPersonnes)
+            afficheRenderDemandeVisite("Votre demande [numero:"+code+"] " +
+                    "a bien ete enregistree et sera traitee " +
+                    "prochainement.")
+        } else if (dateDebut && dateFin) {
+            afficheRenderDemandeVisite("Dates incoherentes")
+        } else {
+            afficheRenderDemandeVisite("Date(s) invalide(s)")
+        }
+    }
+
+    public Date isValid(String strdate) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            df.setLenient(false);
+            Date date = df.parse(strdate);
+            return date;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Transactional

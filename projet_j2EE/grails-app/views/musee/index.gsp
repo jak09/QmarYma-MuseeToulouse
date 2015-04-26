@@ -8,6 +8,32 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
+
+
+		<g:form><div style="float: right">
+			<table>
+				<tr>
+					<td>Mes mus&eacute;es pr&eacute;fer&eacute;s:</td>
+				</tr>
+				<g:each in="${museePrefereInstanceList}" status="i" var="museePrefereInstance">
+					<tr>
+						<td name="attributSupprimer" value="$i">
+							<label>${fieldValue(bean: museePrefereInstance, field: "nom")}</label>
+							<g:link action="supprimerMuseePrefere" id="num${i}">
+								<input value="Supprimer" type="button" class="button"/>
+							</g:link>
+						</td>
+					</tr>
+				</g:each>
+				<tr>
+					<td><g:actionSubmit value="Effectuer une demande de visite"
+										action="effectuerDemandeVisite"
+										disabled="${museePrefereInstanceCount==0}"/></td>
+				</tr>
+			</table>
+		</div></g:form>
+
+
 		<a href="#list-musee" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -29,40 +55,18 @@
 							Nom musee contient:
 						</label>
 						<g:textField name="extraitNom"/>
-						<br/>
+						<br/><br/>
 						<label for="extraitRue">
 							Nom rue musee contient:
 						</label>
 						<g:textField name="extraitRue"/>
-						<br/>
+						<br/><br/>
 						<label for="codePostal">
 							Code Postal:
 						</label>
 						<g:select name="codePostal" from="${["31000", "31500"]}"/>
-						<br/>
-						<label> </label><g:actionSubmit action="doSearchMusee" value="Rechercher"/>
-					</div>
-				</fieldset>
-
-				<fieldset class="form">
-					<div class="encart">
-						<table>
-							<tr>
-								<td>Mes mus&eacute;es pr&eacute;fer&eacute;s:</td>
-							</tr>
-							<g:each in="${museePrefereInstanceList}" status="i" var="museePrefereInstance">
-								<tr>
-									<td name="attributSupprimer" value="$i">
-										<label>${fieldValue(bean: museePrefereInstance, field: "nom")}</label>
-										<g:actionSubmit value="Supprimer ($i)" action="supprimerMuseePrefere"/>
-									</td>
-								</tr>
-							</g:each>
-							<tr>
-								<td><g:actionSubmit value="Effectuer une demande de visite"
-													action="effectuerDemandeVisite"/></td>
-							</tr>
-						</table>
+						<br/><br/>
+						<label>&nbsp;&nbsp;</label><g:actionSubmit action="doSearchMusee" value="Rechercher"/>
 					</div>
 				</fieldset>
 
@@ -72,7 +76,6 @@
 
 
 			<table>
-			<thead>
 					<tr>
 
 						<g:sortableColumn property="extraitNom" title="Nom" />
@@ -81,23 +84,21 @@
 
 						<g:sortableColumn property="adresse" title="Adresse" />
 
-						<g:sortableColumn property="accesMetro" title="Acces Metro"/>
+						<g:sortableColumn property="accesMetro" title="Metro"/>
 
-						<g:sortableColumn property="accesBus" title="Acces Bus"/>
+						<g:sortableColumn property="accesBus" title="Bus"/>
 
 						<g:sortableColumn property="horairesOuverture" title="Horaires" />
 
 						<g:sortableColumn property="gestionnaire" title="Gestionnaire"/>
 
-						<g:sortableColumn property="ajoutFavori" title="Ajouter &agrave; mes mus&eacute;es favoris"/>
+						<g:sortableColumn property="ajoutFavori" title="Favoris"/>
 					
 					</tr>
-				</thead>
-				<tbody>
 				<g:form><g:each in="${museeInstanceList}" status="i" var="museeInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${museeInstance.id}">${fieldValue(bean: museeInstance, field: "nom")}</g:link></td>
+						<td>${fieldValue(bean: museeInstance, field: "nom")}</td>
 
 						<td>${fieldValue(bean: museeInstance, field: "telephone")}</td>
 
@@ -112,13 +113,14 @@
 						<td>${fieldValue(bean: museeInstance, field: "gestionnaire")}</td>
 						
 						<td>
-							<g:actionSubmit action="ajouterMuseePrefere" value="Ajouter ($i)"
-											disabled="${museePrefereInstanceList.contains(museeInstance)}"/>
+							<g:link action="ajouterMuseePrefere" id="num${i}">
+								<input value="Ajouter" type="button" class="button"
+											${museePrefereInstanceList.contains(museeInstance) ? "disabled" : ""}/>
+							</g:link>
 						</td>
 					
 					</tr>
 				</g:each></g:form>
-				</tbody>
 			</table>
 			<div class="pagination">
 				<g:paginate total="${museeInstanceCount ?: 0}" />

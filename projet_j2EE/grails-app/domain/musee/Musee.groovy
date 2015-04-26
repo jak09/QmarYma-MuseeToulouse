@@ -9,14 +9,16 @@ class Musee {
     String accesBus
     Adresse adresse
 
-    Map<DemandeVisite, DemandeVisiteMusee> visites
-
     static constraints = {
     }
 
     static mapping = {
         adresse fetch: 'join'
     }
+
+    static hasMany = [
+            visites: DemandeVisite
+    ]
 
     static belongsTo = [
             gestionnaire: Gestionnaire
