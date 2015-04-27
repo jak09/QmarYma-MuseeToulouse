@@ -1,0 +1,10 @@
+Testsuite: musee.RechercheMuseeServiceIntegrationTestSpec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 1,615 sec
+------------- Standard Output ---------------
+--Output from test recherche musee--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from test recherche musee--
+------------- ---------------- ---------------
+
+Testcase: test recherche musee took 1,609 sec

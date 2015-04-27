@@ -15,8 +15,8 @@ class BaseDeDonnees {
     static void insererGestionnaires() {
         g1 = new Gestionnaire(nom: "Mairie de Toulouse - DGA Culture")
         g2 = new Gestionnaire(nom: "Association")
-        g1.save()
-        g2.save()
+        g1.save(flush: true)
+        g2.save(flush: true)
     }
 
     static void insererMusees() {
@@ -32,7 +32,7 @@ class BaseDeDonnees {
                         numero:2,
                         rue:"RUE DES ARCHIVES",
                         codePostal: "31500",
-                        ville:"TOULOUSE"))
+                        ville:"TOULOUSE").save(flush: true))
         m2 = new Musee(
                 nom:"CMAV - CENTRE MERIDIONAL DE L'ARCHITECTURE DE LA VILLE",
                 horairesOuverture: "Ouvert du mardi au samedi de 13h à 19h " +
@@ -44,7 +44,7 @@ class BaseDeDonnees {
                         numero:5,
                         rue:"RUE SAINT PANTALEON",
                         codePostal: "31000",
-                        ville:"TOULOUSE"))
+                        ville:"TOULOUSE").save(flush: true))
         m3 = new Musee(
                 nom:"ENSEMBLE CONVENTUEL DES JACOBINS",
                 horairesOuverture: "Ouvert tous les jours de 9h à 19h.",
@@ -55,11 +55,11 @@ class BaseDeDonnees {
                         numero:69,
                         rue:"RUE PARGAMINIERES",
                         codePostal: "31000",
-                        ville:"TOULOUSE"))
+                        ville:"TOULOUSE").save(flush: true))
 
-        /*m1.save()
-        m2.save()
-        m3.save()*/
+        m1.save(flush: true)
+        m2.save(flush: true)
+        m3.save(flush: true)
 
     }
 

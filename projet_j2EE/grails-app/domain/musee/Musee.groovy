@@ -26,6 +26,10 @@ class Musee {
             visites: DemandeVisite
     ]
 
+    static belongsTo = [
+            gestionnaire: Gestionnaire
+    ]
+
     @Override
     String toString() {
         nom

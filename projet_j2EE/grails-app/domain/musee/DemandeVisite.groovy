@@ -13,7 +13,7 @@ class DemandeVisite {
         statut nullable: true
     }
 
-    static belongsTo = [
+    /*static belongsTo = [
             musee: Musee
-    ]
+    ]*/
 }

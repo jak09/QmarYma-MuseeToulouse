@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="0" failures="0" hostname="Yan" id="0" name="RechercheMuseeServiceIntegrationTestSpec" package="musee" tests="1" time="1.615" timestamp="2015-04-27T11:12:28">
+      <properties />
+
+      <testcase classname="musee.RechercheMuseeServiceIntegrationTestSpec" name="test recherche musee" time="1.609" />
+
+      <system-out><![CDATA[--Output from test recherche musee--
+]]></system-out>
+
+      <system-err><![CDATA[--Output from test recherche musee--
+]]></system-err>
+
+  </testsuite>
+</testsuites>

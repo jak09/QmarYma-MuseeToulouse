@@ -22,9 +22,9 @@ class DemandeVisiteSpec extends Specification {
 
         where:
         code  |  dateDebut   |   dateFin   |  nbPersonnes   |   statut
-        12    |  null        |    null     |    4           |   null
-        12    |  new Date()  | new Date()  |   5            |    ""
-        12    |  new Date()  | new Date()  |   5            |    "en traitement"
+        12    |  new Date()  |   new Date()|    4           |   null
+        12    |  new Date()  | new Date()  |    5           |    ""
+        12    |  new Date()  | new Date()  |    5           |    "en traitement"
 
     }
 

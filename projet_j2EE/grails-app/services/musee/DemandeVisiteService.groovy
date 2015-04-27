@@ -23,8 +23,8 @@ class DemandeVisiteService {
             demandeVisiteMusee.musee = m.museePrefere
         }
 
-        demandeVisite.save(flush: true)
-        demandeVisiteMusee.save(flush: true)
+        /*demandeVisite.save(flush: true)
+        demandeVisiteMusee.save(flush: true)*/
         demandeVisite.code
     }
 }
